@@ -672,6 +672,7 @@ static void vc_init_ctrl_imx708(struct vc_ctrl *ctrl, struct vc_desc* desc)
 
         ctrl->flags                     = FLAG_EXPOSURE_SONY;
         ctrl->flags                    |= FLAG_INCREASE_FRAME_RATE;
+        ctrl->flags                    |= FLAG_DOUBLE_HEIGHT;
         ctrl->flags                    |= FLAG_FORMAT_GBRG;
         ctrl->flags                    |= FLAG_IO_ENABLED;
 }
