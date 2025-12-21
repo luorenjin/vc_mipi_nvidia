@@ -21,10 +21,10 @@
 #define MOD_ID_IMX415           0x0415
 #define MOD_ID_IMX462           0x0462
 #define MOD_ID_IMX565           0x0565
-#define MOD_ID_IMX708           0x0708
 #define MOD_ID_IMX566           0x0566
 #define MOD_ID_IMX567           0x0567
 #define MOD_ID_IMX568           0x0568
+#define MOD_ID_IMX708           0x0708
 #define MOD_ID_IMX900           0x0900
 #define MOD_ID_OV7251           0x7251
 #define MOD_ID_OV9281           0x9281
