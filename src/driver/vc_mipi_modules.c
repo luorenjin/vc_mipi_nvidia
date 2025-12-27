@@ -652,7 +652,7 @@ static void vc_init_ctrl_imx708(struct vc_ctrl *ctrl, struct vc_desc* desc)
         FRAME(0, 0, 4608, 2592)
         //all read out         binning  hmax  vmax      vmax   vmax  blkl  blkl  retrigger
         //                      mode           min       max    def   max   def
-        // Full resolution modes (4608x2592 @ 20/30fps)
+        // Full resolution modes (4608x2592)
         MODE( 0, 2, FORMAT_RAW10, 0,    2357,    8,  0xfffff, 0x627, 1023,   50,         0)  // 2-lane 20fps (bandwidth safe)
         MODE( 1, 4, FORMAT_RAW10, 0,     830,    8,  0xfffff, 0xba5, 1023,   50,         0)  // 4-lane 30fps
 
