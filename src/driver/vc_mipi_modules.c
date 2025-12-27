@@ -634,6 +634,49 @@ static void vc_init_ctrl_imx462(struct vc_ctrl *ctrl, struct vc_desc *desc)
         MODE( 1, 4, FORMAT_RAW10, 0,     550,    1,  0x3ffff, 0x465,  511,   60,         0)
 }
 
+// ------------------------------------------------------------------------------------------------
+//  Settings for IMX708 (Rev.01)
+//  11.9 MegaPixel
+
+static void vc_init_ctrl_imx708(struct vc_ctrl *ctrl, struct vc_desc* desc)
+{
+        INIT_MESSAGE("IMX708")
+        
+        ctrl->gain                      = (vc_control) { .min =   0, .max =       240, .def =      0 };
+
+        ctrl->csr.sen.blacklevel        = (vc_csr2) { .l = 0x30e2, .m = 0x30e3 };
+        ctrl->csr.sen.vmax              = (vc_csr4) { .l = 0x3024, .m = 0x3025, .h = 0x3026, .u = 0x0000 };
+        ctrl->csr.sen.mode_standby      = 0x01;
+        ctrl->csr.sen.mode_operating    = 0x00;
+
+        FRAME(0, 0, 4608, 2592)
+        //all read out         binning  hmax  vmax      vmax   vmax  blkl  blkl  retrigger
+        //                      mode           min       max    def   max   def
+        // Full resolution modes (4608x2592)
+        MODE( 0, 2, FORMAT_RAW10, 0,    2357,    8,  0xfffff, 0x627, 1023,   50,         0)  // 2-lane 20fps (bandwidth safe)
+        MODE( 1, 4, FORMAT_RAW10, 0,     830,    8,  0xfffff, 0xba5, 1023,   50,         0)  // 4-lane 30fps
+
+        // 1080p modes (1920x1080 @ 30/60fps)
+        MODE( 2, 2, FORMAT_RAW10, 0,    1050,    8,  0xfffff, 0x935, 1023,   50,         0)  // 2-lane 30fps
+        MODE( 3, 4, FORMAT_RAW10, 0,     550,    8,  0xfffff, 0x8ca, 1023,   50,         0)  // 4-lane 60fps
+
+        // 720p modes (1280x720 @ 60/120fps)
+        MODE( 4, 2, FORMAT_RAW10, 0,     700,    8,  0xfffff, 0x6e7, 1023,   50,         0)  // 2-lane 60fps
+        MODE( 5, 4, FORMAT_RAW10, 0,     370,    8,  0xfffff, 0x688, 1023,   50,         0)  // 4-lane 120fps
+
+        // Binning modes (2304x1296 @ 30/56fps, 2x2 binning)
+        MODE( 6, 2, FORMAT_RAW10, 1,    1050,    8,  0xfffff, 0x935, 1023,   50,         0)  // 2-lane 30fps
+        MODE( 7, 4, FORMAT_RAW10, 1,     560,    8,  0xfffff, 0x93f, 1023,   50,         0)  // 4-lane 56fps
+
+        ctrl->clk_pixel                 = 74250000;
+
+        ctrl->flags                     = FLAG_EXPOSURE_SONY;
+        ctrl->flags                    |= FLAG_INCREASE_FRAME_RATE;
+        ctrl->flags                    |= FLAG_DOUBLE_HEIGHT;
+        ctrl->flags                    |= FLAG_FORMAT_GBRG;
+        ctrl->flags                    |= FLAG_IO_ENABLED;
+}
+
 #define IMX56X_HV_MODE                  0x303c
 #define IMX56X_BINNING_MODE_DISABLE     0x00
 #define IMX56X_BINNING_MODE_ENABLE      0x10
@@ -1058,6 +1101,7 @@ int vc_mod_ctrl_init(struct vc_ctrl* ctrl, struct vc_desc* desc)
         case MOD_ID_IMX566: vc_init_ctrl_imx566(ctrl, desc); break;
         case MOD_ID_IMX567: vc_init_ctrl_imx567(ctrl, desc); break;
         case MOD_ID_IMX568: vc_init_ctrl_imx568(ctrl, desc); break;
+        case MOD_ID_IMX708: vc_init_ctrl_imx708(ctrl, desc); break;
         case MOD_ID_IMX900: vc_init_ctrl_imx900(ctrl, desc); break;
         case MOD_ID_OV7251: vc_init_ctrl_ov7251(ctrl, desc); break;
         case MOD_ID_OV9281: vc_init_ctrl_ov9281(ctrl, desc); break;

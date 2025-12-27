@@ -42,6 +42,7 @@
   * IMX412
   * IMX415
   * IMX565, IMX566, IMX567, IMX568
+  * IMX708
   * IMX900
   * OV7251, OV9281
 * Features
@@ -249,6 +250,27 @@ The property *max_framerate* is given for the number of lanes and the pixel form
 </details>
 
 <details>
+  <summary>GStreamer properties for IMX708 (camera with 2 and 4 lanes support)</summary>
+
+| Property             | IMX708     |
+| -------------------- | ---------: |
+| physical_w           |      6.451 |
+| physical_h           |      3.629 |
+| active_w             |       4608 |
+| active_h             |       2592 |
+| pixel_t              |      GB 10 |
+| max_gain_val         |         72 |
+| step_gain_val        |      0.300 |
+| max_framerate (2L08) |          - |
+| max_framerate (2L10) |       20.0 |
+| max_framerate (2L12) |          - |
+| max_framerate (4L08) |          - |
+| max_framerate (4L10) |       30.0 |
+| max_framerate (4L12) |          - |
+
+</details>
+
+<details>
   <summary>GStreamer properties for IMX565, IMX566, IMX567, IMX568 and IMX900 (cameras with 2 and 4 lanes support)</summary>
 
 | Property             | IMX565     | IMX566     | IMX567/568 | IMX900     |
@@ -399,6 +421,7 @@ The following table lists the Jetson device and the necessary file:
 * IMX412 (Rev.05)
 * IMX415 (Rev.02)
 * IMX565 (Rev.03), IMX566 (Rev.03), IMX567 (Rev.03), IMX568 (Rev.04)
+* IMX708 (Rev.01)
 * IMX900 (Rev.02)
 * OV7251 (Rev.01), OV9281 (Rev.02)
 
